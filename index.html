@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CyberSafe Student - Cybersecurity Education Platform</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+  <!-- SVG Gradient Definitions for Animated Circular Gauge -->
+  <svg width="0" height="0" style="position: absolute;">
+    <defs>
+      <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#06b6d4" />
+        <stop offset="100%" stop-color="#3b82f6" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="app-header">
+    <div class="brand-container" onclick="switchSection('dashboard')">
+      <span class="brand-logo">🛡️</span>
+      <span class="brand-name">CyberSafe Student</span>
+      <span class="brand-tag">EDU</span>
+    </div>
+
+    <nav class="nav-desktop">
+      <button class="nav-item active" data-nav="dashboard">📊 Dashboard</button>
+      <button class="nav-item" data-nav="academy">📚 Academy</button>
+      <button class="nav-item" data-nav="tools">🛠️ Tools</button>
+      <button class="nav-item" data-nav="phishing">🎣 Phishing</button>
+      <button class="nav-item" data-nav="quiz">🧠 Quiz</button>
+      <button class="nav-item" data-nav="checkup">🛡️ Checkup</button>
+      <button class="nav-item" data-nav="badges">🏆 Badges</button>
+      <button class="nav-item" data-nav="leaderboard">🏅 Ranks</button>
+      <button class="nav-item" data-nav="safety-center">🚨 Safety</button>
+      <button class="nav-item" data-nav="profile">👤 Profile</button>
+    </nav>
+
+    <div class="header-actions">
+      <button class="btn-demo" id="demo-mode-btn" title="Competition Executive Demo Mode">
+        🎤 Competition Demo
+      </button>
+      <button class="btn-icon" id="theme-toggle-btn" title="Toggle Dark/Light Mode">
+        🌗
+      </button>
+      <button class="btn-icon hamburger-btn" id="mobile-menu-btn" title="Toggle Navigation Menu">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav" id="mobile-nav-drawer">
+    <button class="nav-item active" data-nav="dashboard">📊 Dashboard</button>
+    <button class="nav-item" data-nav="academy">📚 Cybersecurity Academy</button>
+    <button class="nav-item" data-nav="tools">🛠️ Security Tools (URL & Password)</button>
+    <button class="nav-item" data-nav="phishing">🎣 Phishing Simulator</button>
+    <button class="nav-item" data-nav="quiz">🧠 Cybersecurity Quiz</button>
+    <button class="nav-item" data-nav="checkup">🛡️ Security Checkup</button>
+    <button class="nav-item" data-nav="badges">🏆 XP & Badges</button>
+    <button class="nav-item" data-nav="leaderboard">🏅 Student Leaderboard</button>
+    <button class="nav-item" data-nav="safety-center">🚨 Safety Emergency Center</button>
+    <button class="nav-item" data-nav="profile">👤 Student Profile</button>
+  </div>
+
+  <!-- ==========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================== -->
+  <main class="main-container">
+
+    <!-- ------------------------------------------------------------------------
+         SECTION 1: DASHBOARD
+         ------------------------------------------------------------------------ -->
+    <section class="app-section active" id="dashboard-section">
+      
+      <!-- Welcome Banner -->
+      <div class="welcome-banner">
+        <div>
+          <h1 class="welcome-title">Welcome back, <span class="user-name-display">Zoyan</span>! 👋</h1>
+          <p class="welcome-sub">Keep building your digital defense habits today.</p>
+        </div>
+        <div class="user-badges-strip">
+          <span class="badge-pill streak">🔥 <span class="user-streak-display">7 Days</span></span>
+          <span class="badge-pill level">⚡ <span class="user-level-display">Cyber Guardian</span></span>
+        </div>
+      </div>
+
+      <!-- Score & Categories Grid -->
+      <div class="dashboard-grid">
+        
+        <!-- Score Card -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">🛡️ Cyber Safety Score</h3>
+              <span class="card-sub">Overall Defense Index</span>
+            </div>
+            <span class="score-status-badge">GOOD PROTECTION</span>
+          </div>
+
+          <div class="score-widget-container">
+            <div class="score-circle-wrapper">
+              <svg class="score-circle-svg" viewBox="0 0 120 120">
+                <circle class="score-circle-bg" cx="60" cy="60" r="54"></circle>
+                <circle class="score-circle-progress" id="dash-score-progress" cx="60" cy="60" r="54"></circle>
+              </svg>
+              <div class="score-number-overlay">
+                <span class="score-val" id="dash-score-val">82</span>
+                <span class="score-label">/ 100</span>
+              </div>
+            </div>
+
+            <div class="category-scores-list" id="dash-categories-container">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Stats & Daily Challenge -->
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon">📚</div>
+              <div>
+                <div class="stat-val" id="dash-courses-val">8 / 14</div>
+                <div class="stat-lbl">Completed Lessons</div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon">🎯</div>
+              <div>
+                <div class="stat-val" id="dash-quiz-val">87%</div>
+                <div class="stat-lbl">Quiz Best Score</div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon">⚡</div>
+              <div>
+                <div class="stat-val"><span class="user-xp-display">1,250</span></div>
+                <div class="stat-lbl">Total Student XP</div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon">🔥</div>
+              <div>
+                <div class="stat-val"><span class="user-streak-display">7 Days</span></div>
+                <div class="stat-lbl">Current Streak</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Daily Cyber Challenge Box -->
+          <div id="daily-challenge-box">
+            <!-- Dynamically populated -->
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Quick Actions Grid -->
+      <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">⚡ Quick Security Actions</h3>
+      <div class="quick-actions-grid">
+        <button class="quick-action-btn" onclick="switchSection('tools')">
+          <span class="action-icon">🔗</span>
+          <div>
+            <div class="action-title">Analyze URL</div>
+            <div class="action-desc">Check domain risk heuristics</div>
+          </div>
+        </button>
+
+        <button class="quick-action-btn" onclick="switchSection('phishing')">
+          <span class="action-icon">🎣</span>
+          <div>
+            <div class="action-title">Phishing Simulator</div>
+            <div class="action-desc">Train phishing detection</div>
+          </div>
+        </button>
+
+        <button class="quick-action-btn" onclick="switchSection('tools')">
+          <span class="action-icon">🔐</span>
+          <div>
+            <div class="action-title">Password Checker</div>
+            <div class="action-desc">Evaluate strength & generate</div>
+          </div>
+        </button>
+
+        <button class="quick-action-btn" onclick="switchSection('quiz')">
+          <span class="action-icon">🧠</span>
+          <div>
+            <div class="action-title">Cyber Quiz</div>
+            <div class="action-desc">Test your security knowledge</div>
+          </div>
+        </button>
+
+        <button class="quick-action-btn" onclick="switchSection('checkup')">
+          <span class="action-icon">🛡️</span>
+          <div>
+            <div class="action-title">Security Checkup</div>
+            <div class="action-desc">Interactive defense audit</div>
+          </div>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ------------------------------------------------------------------------
+         SECTION 2: CYBERSECURITY ACADEMY
+         ------------------------------------------------------------------------ -->
+    <section class="app-section" id="academy-section">
+      <div class="sim-header">
+        <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.25rem;">📚 Cybersecurity Academy</h2>
+        <p style="color: var(--text-muted);">Interactive security courses for beginners and intermediate learners.</p>
+      </div>
+
+      <div class="academy-controls">
+        <div class="tab-group">
+          <button class="tab-btn academy-tab active" data-filter="all" onclick="renderAcademy('all')">All Lessons</button>
+          <button class="tab-btn academy-tab" data-filter="beginner" onclick="renderAcademy('beginner')">Beginner (1-8)</button>
+          <button class="tab-btn academy-tab" data-filter="intermediate" onclick="renderAcademy('intermediate')">Intermediate (9-14)</button>
+          <button class="tab-btn academy-tab" data-filter="completed" onclick="renderAcademy('completed')">Completed</button>
+        </div>
+      </div>
+
+      <div class="lessons-grid" id="academy-grid">
+        <!-- Dynamically rendered -->
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------------------
+         SECTION 3: SECURITY TOOLS (URL & PASSWORD)
+         ------------------------------------------------------------------------ -->
+    <section class="app-section" id="tools-section">
+      <div class="tools-wrapper">
+        <div class="sim-header">
+          <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.25rem;">🛠️ Interactive Security Tools</h2>
+          <p style="color: var(--text-muted);">Evaluate website links and audit password resilience locally in your browser.</p>
+        </div>
+
+        <!-- Tool 1: URL Safety Analyzer -->
+        <div class="card" style="margin-bottom: 2rem;">
+          <h3 class="card-title" style="margin-bottom: 0.5rem;">🔗 URL Safety Analyzer</h3>
+          <p class="card-sub" style="margin-bottom: 1.25rem;">Enter any web address to run client-side heuristic security analysis.</p>
+
+          <div class="input-group">
+            <input type="text" class="text-input" id="url-input-field" placeholder="e.g. https://example.com/login" />
+            <button class="btn-primary" onclick="analyzeUrlInput()">Analyze URL 🔍</button>
+          </div>
+
+          <div class="presets-strip">
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Sample Test URLs:</span>
+            <button class="preset-btn" onclick="setPresetUrl('https://google.com')">Safe: google.com</button>
+            <button class="preset-btn" onclick="setPresetUrl('http://192.168.1.1/login-verify-account-now')">Suspicious: Raw IP</button>
+            <button class="preset-btn" onclick="setPresetUrl('http://paypal-security-update.account-alert.xyz/auth')">Dangerous: Phish URL</button>
+          </div>
+
+          <div id="url-report-box" style="display: none; background: var(--bg-primary); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <!-- Dynamically rendered report -->
+          </div>
+        </div>
+
+        <!-- Tool 2: Password Strength Checker & Generator -->
+        <div class="card">
+          <h3 class="card-title" style="margin-bottom: 0.5rem;">🔐 Password Strength Checker & Generator</h3>
+          <p class="card-sub" style="margin-bottom: 1.25rem;">Test your password strength or generate uncrackable random credentials. <em>100% private & client-side.</em></p>
+
+          <div class="input-group">
+            <input type="password" class="text-input" id="pw-checker-field" placeholder="Enter a password to test..." oninput="evaluatePasswordInput()" />
+            <button class="btn-secondary" onclick="const f = document.getElementById('pw-checker-field'); f.type = f.type === 'password' ? 'text' : 'password';">👁️ Show/Hide</button>
+          </div>
+
+          <div id="pw-result-box" style="display: none; background: var(--bg-primary); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 1.5rem;">
+            <!-- Dynamically rendered PW feedback -->
+          </div>
+
+          <!-- Password Generator subcard -->
+          <div class="pw-generator-box">
+            <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--accent-cyan); margin-bottom: 0.5rem;">🎲 Generate Strong Random Password</h4>
+            
+            <div class="slider-container">
+              <span style="font-size: 0.85rem; font-weight: 600;">Length:</span>
+              <input type="range" class="range-slider" id="gen-length-slider" min="8" max="32" value="16" oninput="document.getElementById('gen-len-val').textContent = this.value; generateRandomPassword();" />
+              <span id="gen-len-val" style="font-weight: 800; color: var(--accent-cyan); width: 24px;">16</span>
+            </div>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.85rem; margin-bottom: 1rem;">
+              <label><input type="checkbox" id="gen-chk-upper" checked onchange="generateRandomPassword()" /> Uppercase (A-Z)</label>
+              <label><input type="checkbox" id="gen-chk-lower" checked onchange="generateRandomPassword()" /> Lowercase (a-z)</label>
+              <label><input type="checkbox" id="gen-chk-num" checked onchange="generateRandomPassword()" /> Numbers (0-9)</label>
+              <label><input type="checkbox" id="gen-chk-sym" checked onchange="generateRandomPassword()" /> Symbols (!@#$)</label>
+            </div>
+
+            <button class="btn-primary" onclick="generateRandomPassword()">Generate New Password 🎲</button>
+
+            <div class="gen-output-row">
+              <div class="gen-output-field" id="gen-output-text">Click generate above...</div>
+              <button class="btn-secondary" onclick="copyGeneratedPassword()">📋 Copy</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------------------
+         SECTION 4: PHISHING SIMULATOR
+         ------------------------------------------------------------------------ -->
+    <section class="app-section" id="phishing-section">
+      <div class="sim-container">
+        <div class="sim-header">
+          <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.25rem;">🎣 Phishing Attack Simulator</h2>
+          <p style="color: var(--text-muted);">Inspect incoming fictional messages and determine if they are safe or a scam.</p>
+        </div>
+
+        <div class="sim-progress-bar">
+          <span>Scenario Progress: <strong id="phish-current-count">1 / 10</strong></span>
+          <span style="color: var(--accent-cyan);">+30 XP per correct identification</span>
+        </div>
+
+        <div id="phish-scenario-box">
+          <!-- Dynamically rendered email card -->
+        </div>
+
+        <div class="sim-actions">
+          <button class="btn-phish" id="btn-phish-choice" onclick="submitPhishingAnswer(true)">🚨 Phishing Attack!</button>
+          <button class="btn-safe" id="btn-safe-choice" onclick="submitPhishingAnswer(false)">🟢 Safe Communication</button>
+        </div>
+
+        <div class="sim-feedback-card" id="phish-feedback-box">
+          <!-- Feedback rendered after selection -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------------------
+         SECTION 5: CYBERSECURITY QUIZ
+         ------------------------------------------------------------------------ -->
+    <section class="app-section" id="quiz-section">
+      <div class="quiz-container">
+        
+        <!-- Quiz Start Box -->
+        <div class="card" id="quiz-start-box" style="text-align: center; padding: 2.5rem 1.5rem;">
+          <span style="font-size: 3rem; margin-bottom: 0.5rem; display: inline-block;">🧠</span>
+          <h2 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.5rem;">Comprehensive Cybersecurity Quiz</h2>
+          <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 1.5rem auto;">
+            Test your knowledge across 30 questions covering Phishing, Passwords, Privacy, Malware, MFA, and Safe Browsing.
+          </p>
+          <button class="btn-primary" style="font-size: 1.05rem; padding: 0.85rem 2rem;" onclick="startQuiz()">Start Quiz Challenge 🚀</button>
+        </div>
+
+        <!-- Quiz Active Question Box -->
+        <div class="card" id="quiz-active-box" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-cyan);" id="quiz-q-number">Question 1 / 30</span>
+            <span class="badge-pill level">30 Questions</span>
+          </div>
+
+          <div class="progress-bar-bg" style="margin-bottom: 1.5rem;">
+            <div class="progress-bar-fill" id="quiz-progress-fill" style="width: 3.33%;"></div>
+          </div>
+
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem;" id="quiz-q-text">Loading question...</h3>
+
+          <div class="quiz-options-list" id="quiz-options-box">
+            <!-- Dynamically populated options -->
+          </div>
+
+          <div id="quiz-explanation-box" style="display: none; background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-top: 1rem;">
+            <!-- Dynamically populated explanation -->
+          </div>
+        </div>
+
+        <!-- Quiz Results Box -->
+        <div class="card" id="quiz-results-box" style="display: none;">
+          <!-- Dynamically populated final score -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------------------
+         SECTION 6: SECURITY CHECKUP
+         ------------------------------------------------------------------------ -->
+    <section class="app-section" id="checkup-section">
+      <div style="max-width: 800px; margin: 0 auto;">
+        <div class="sim-header">
+          <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.25rem;">🛡️ Interactive Security Checkup</h2>
+          <p style="color: var(--text-muted);">Check off your active defense habits to recalculate your personal Cyber Safety Score.</p>
+        </div>
+
+        <div class="checkup-list" id="checkup-items-list">
+          <!-- Dynamically populated checkup items -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------------------
+         SECTION 7: BADGES & XP
+         ------------------------------------------------------------------------ -->
+    <section class="app-section" id="badges-section">
+      <div class="sim-header">
+        <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.25rem;">🏆 XP & Achievement Badges</h2>
+        <p style="color: var(--text-muted);">Earn experience points and unlock cybersecurity mastery badges as you learn.</p>
+      </div>
+
+      <div class="lessons-grid" id="badges-grid-container">
+        <!-- Dynamically rendered badges -->
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------------------
+         SECTION 8: STUDENT LEADERBOARD
+         ------------------------------------------------------------------------ -->
+    <section class="app-section" id="leaderboard-section">
+      <div style="max-width: 800px; margin: 0 auto;">
+        <div class="sim-header">
+          <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.25rem;">🏅 Student Cyber Leaderboard</h2>
+          <p style="color: var(--text-muted);">Local demonstration leaderboard comparing top student security scores.</p>
+        </div>
+
+        <div class="card">
+          <table class="leaderboard-table">
+            <thead>
+              <tr style="text-align: left; color: var(--text-muted); font-size: 0.85rem;">
+                <th>Rank</th>
+                <th>Student Name</th>
+                <th>Level Title</th>
+                <th>Total XP</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboard-table-body">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+          <p style="font-size: 0.75rem; color: var(--text-dim); text-align: center; margin-top: 1rem;">
+            * Demonstrative local ranking table for competition display.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------------------
+         SECTION 9: SAFETY EMERGENCY CENTER
+         ------------------------------------------------------------------------ -->
+    <section class="app-section" id="safety-center-section">
+      <div style="max-width: 850px; margin: 0 auto;">
+        <div class="sim-header">
+          <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.25rem;">🚨 Emergency Safety Response Center</h2>
+          <p style="color: var(--text-muted);">Defensive protocols and immediate steps to take during security incidents.</p>
+        </div>
+
+        <div class="dashboard-grid">
+          
+          <div class="card">
+            <h3 class="card-title" style="color: var(--color-warning);">📩 Received Suspicious Message?</h3>
+            <ol style="padding-left: 1.25rem; font-size: 0.9rem; margin-top: 0.75rem; line-height: 1.6;">
+              <li><strong>Do NOT click any links</strong> or open attachments.</li>
+              <li><strong>Do NOT provide OTPs</strong> or account passwords.</li>
+              <li>Verify the sender through an official phone number or website.</li>
+              <li>Report and block the sender in your app.</li>
+            </ol>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title" style="color: var(--color-danger);">🔓 Account Hacked / Compromised?</h3>
+            <ol style="padding-left: 1.25rem; font-size: 0.9rem; margin-top: 0.75rem; line-height: 1.6;">
+              <li>Change password immediately from a trusted secure device.</li>
+              <li>Revoke active sessions in security settings.</li>
+              <li>Enable Multi-Factor Authentication (2FA).</li>
+              <li>Contact service provider support to verify recovery.</li>
+            </ol>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title" style="color: var(--accent-cyan);">📱 Stolen or Lost Mobile Device?</h3>
+            <ol style="padding-left: 1.25rem; font-size: 0.9rem; margin-top: 0.75rem; line-height: 1.6;">
+              <li>Use 'Find My Device' to lock and erase remotely.</li>
+              <li>Change master passwords for primary email accounts.</li>
+              <li>Inform your SIM carrier to block the SIM card.</li>
+            </ol>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title" style="color: var(--accent-purple);">🌐 Safe Public Wi-Fi Checklist</h3>
+            <ol style="padding-left: 1.25rem; font-size: 0.9rem; margin-top: 0.75rem; line-height: 1.6;">
+              <li>Connect through a trusted Virtual Private Network (VPN).</li>
+              <li>Disable 'Auto-Connect to open Wi-Fi' on mobile.</li>
+              <li>Avoid logging into online bank accounts on public Wi-Fi.</li>
+            </ol>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------------------
+         SECTION 10: STUDENT PROFILE
+         ------------------------------------------------------------------------ -->
+    <section class="app-section" id="profile-section">
+      <div style="max-width: 600px; margin: 0 auto;">
+        <div class="sim-header">
+          <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.25rem;">👤 Student Profile & Settings</h2>
+          <p style="color: var(--text-muted);">Manage your display preferences and saved progress data.</p>
+        </div>
+
+        <div class="card">
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 700; margin-bottom: 0.5rem;">Student Display Name:</label>
+            <div class="input-group">
+              <input type="text" class="text-input" id="profile-name-input" value="Zoyan" />
+              <button class="btn-primary" onclick="saveProfileName()">Save Name</button>
+            </div>
+          </div>
+
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">Total XP:</span>
+              <div style="font-size: 1.25rem; font-weight: 800;" id="prof-xp-val">1,250</div>
+            </div>
+            <div>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">Security Index:</span>
+              <div style="font-size: 1.25rem; font-weight: 800;" id="prof-score-val">82 / 100</div>
+            </div>
+          </div>
+
+          <div style="border-top: 1px solid var(--border-color); padding-top: 1.25rem;">
+            <h4 style="font-weight: 700; color: var(--color-danger); margin-bottom: 0.5rem;">Reset Saved Data</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Clear all local storage memory and reset app state back to defaults.</p>
+            <button class="btn-secondary" style="color: var(--color-danger); border-color: var(--color-danger);" onclick="resetProgressData()">Reset Progress Data 🔄</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       MODALS & OVERLAYS
+       ========================================================================== -->
+  
+  <!-- Lesson Detail Modal -->
+  <div class="modal-overlay" id="lesson-modal">
+    <div class="modal-box">
+      <button class="modal-close-btn" onclick="closeLessonModal()">✕</button>
+      <div id="lesson-modal-body">
+        <!-- Dynamically populated -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Competition Demo Executive Modal -->
+  <div class="modal-overlay" id="demo-modal-overlay">
+    <div class="modal-box" id="demo-modal-content">
+      <!-- Dynamically populated -->
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Main JavaScript File -->
+  <script src="./script.js"></script>
+</body>
+</html>

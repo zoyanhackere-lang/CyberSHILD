@@ -1,0 +1,6 @@
+{
+  "name": "CyberSafe Student",
+  "description": "Comprehensive cybersecurity education platform with phishing simulator, password analyzer, URL safety checker, interactive quizzes, and security checkup.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
